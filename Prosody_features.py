@@ -19,6 +19,8 @@ import seaborn as sns
 import disvoice
 from disvoice.phonation import Phonation
 phonationf=Phonation()
+from disvoice.prosody import Prosody
+prosodyf=Prosody()
 
 
 def pad(x, max_len=48000):
@@ -31,10 +33,9 @@ def pad(x, max_len=48000):
 
     return padded_x
 
-  
 data_path = "/home/yahmadia/dataset_add/ADD_Data/ADD_train"
 label_path = "/home/yahmadia/dataset_add/ADD_Data/label/train_label.txt"
-output_path = "/home/yahmadia/dataset_add/ADD_Data/trainPr.pkl"
+output_path = "/home/yahmadia/dataset_add/ADD_Data/trainP.pkl"
 # read in labels
 class ADD(Dataset):
     filename2label = {}
@@ -53,10 +54,9 @@ class ADD(Dataset):
         #sig = pad(sig)
         sr = 16000
         print("rate:", rate)
-        features_phonation=phonationf.extract_features_path(data_path, static=True, plots=False, fmt="npy") #fmt can also be csv, torch or txt
-        print(features_phonation.shape)
-        # rmse = np.reshape(rmse, (1, rmse.size))
-        print("features_phonation:", features_phonation.shape)
-        feats.append((features_phonation, label))
+        features_prosody=prosodyf.extract_features_path(data_path, static=True, plots=False, fmt="npy") #fmt can also be csv, torch or txt
+        print(features_prosody.shape)
+        print("features_prosody:", features_prosody.shape)
+        feats.append((features_prosody, label))
         with open(output_path, 'wb') as outfile:
             torch.save(feats, outfile)
