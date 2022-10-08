@@ -1,7 +1,7 @@
 # 2Part_Audio_Deepfake_Detection
 
 This repository contains the implementation for two-part architecture using prosody features, background noise and semantic analysis for deepfake audio detection
-([https://github.com/YasamanAdl94/2Part_Audio_Deepfake_Detection/image.png](https://github.com/YasamanAdl94/2Part_Audio_Deepfake_Detection/blob/main/image.png))
+(https://github.com/YasamanAdl94/2Part_Audio_Deepfake_Detection/blob/main/image.png)
 
 
 ## Instructions
@@ -9,10 +9,15 @@ This repository contains the implementation for two-part architecture using pros
 First, clone the repository locally, create and activate a conda environment, and install the requirements :
 
 $ git clone https://github.com/YasamanAdl94/2Part_Audio_Deepfake_Detection.git
+
 $ conda create --name RawGAT_ST_anti_spoofing python=3.8.8
+
 $ conda activate RawGAT_ST_anti_spoofing
+
 $ conda install pytorch torchvision torchaudio cudatoolkit=11.1 -c pytorch -c nvidia
+
 $ pip install -r requirements.txt
+
 
 
 
