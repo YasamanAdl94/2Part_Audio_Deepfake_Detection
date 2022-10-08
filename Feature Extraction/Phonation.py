@@ -32,9 +32,10 @@ def pad(x, max_len=48000):
     return padded_x
 
 
-data_path = "/content/drive/MyDrive/Deepfake_Me/ADD_Dataset/track2adp/track2adp_out/"
-label_path = "/content/drive/MyDrive/Deepfake_Me/ADD_Dataset/label/track2_label.txt"
-output_path = "/content/drive/MyDrive/Deepfake_Me/ADD_Dataset/train.pkl"
+
+data_path = "/home/yahmadia/dataset_add/ADD_Data/ADD_train"
+label_path = "/home/yahmadia/dataset_add/ADD_Data/label/train_label.txt"
+output_path = "/home/yahmadia/dataset_add/ADD_Data/trainP.pkl"
 # read in labels
 class ADD(Dataset):
     filename2label = {}
@@ -55,7 +56,6 @@ class ADD(Dataset):
         print("rate:", rate)
         features_phonation=phonationf.extract_features_path(data_path, static=True, plots=False, fmt="npy") #fmt can also be csv, torch or txt
         print(features_phonation.shape)
-        # rmse = np.reshape(rmse, (1, rmse.size))
         print("features_phonation:", features_phonation.shape)
         feats.append((features_phonation, label))
         with open(output_path, 'wb') as outfile:
