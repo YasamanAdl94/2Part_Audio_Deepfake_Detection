@@ -26,9 +26,6 @@ $ pip install -r requirements.txt
     my-voice-analysis: MIT License
 
 
-
-
-
 ## Feature_Extraction
 
 ### Background noise extraction
