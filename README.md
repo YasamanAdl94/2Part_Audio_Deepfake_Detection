@@ -1,9 +1,8 @@
 # 2Part_Audio_Deepfake_Detection
 
-Two-Part Model using prosody features, background noise and semantic analysis for deepfake audio detection
 ===============
-This repository contains the implementation for two-part architecture seen below:
-(https://github.com/YasamanAdl94/2Part_Audio_Deepfake_Detection/issues/1#issue-1401761761)
+This repository contains the implementation for two-part architecture using prosody features, background noise and semantic analysis for deepfake audio detection
+(image.png)
 
 
 ## Instructions
