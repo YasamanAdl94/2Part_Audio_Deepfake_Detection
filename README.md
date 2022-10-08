@@ -37,8 +37,9 @@ Using Librosa library, we can extract and separate background and foreground inf
 
 Prosody features are extracted from audio files based on duration, fundamental frequency and energy. 
 103 features include:
-       V: voiced
-       U: Unvoiced
+
+      V: voiced
+      U: Unvoiced
       1-6 F0-contour: Avg., Std., Max., Min., Skewness, Kurtosis
       7-12 Tilt of a linear estimation of F0 for each voiced segment: Avg., Std., Max., Min., Skewness, Kurtosis
       13-18 MSE of a linear estimation of F0 for each voiced segment: Avg., Std., Max., Min., Skewness, Kurtosis
