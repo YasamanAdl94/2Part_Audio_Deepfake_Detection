@@ -77,7 +77,7 @@ There are seven phonation features which are extracted:
 
 ### Semantic Analysis
 
-A pyhton library "my-voice-analysis" is used to analyse voices by breaking utterances and detecting fundamnetal frequency contours. The features that can be extracted using this library are:
+A python library "my-voice-analysis" is used to analyze voices by breaking utterances and detecting fundamental frequency contours. The features that can be extracted using this library are:
     
     number_ of_syllables     
     number_of_pauses         
