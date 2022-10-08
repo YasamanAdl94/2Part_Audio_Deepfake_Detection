@@ -2,7 +2,7 @@
 
 ===============
 This repository contains the implementation for two-part architecture using prosody features, background noise and semantic analysis for deepfake audio detection
-![image.png] (https://github.com/YasamanAdl94/2Part_Audio_Deepfake_Detection/image.png)
+(https://github.com/YasamanAdl94/2Part_Audio_Deepfake_Detection/image.png)
 
 
 ## Instructions
