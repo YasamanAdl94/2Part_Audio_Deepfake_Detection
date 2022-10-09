@@ -103,7 +103,7 @@ Note: The dataset path should be changed to the corresponding folder. Data proce
 
 ### Testing
 
-python main.py --loss=WCE --is_eval --eval --model_path='/path/to/your/best_model.pth' --eval_output='scores.txt'
+python evaluation.py --loss=WCE --model_path='/path/to/your/best_model.pth' --eval_output='scores.txt'
 
 Track 1: **Fully fake** audios generated using the TTS and VC algorithms with various background noises
 
