@@ -24,13 +24,11 @@ $ pip install -r requirements.txt
     Soundfile: BSD License (BSD 3-Clause License)
     DisVoice: MIT License
     my-voice-analysis: MIT License
-
 ## Feature_Extraction
 
 ### Background noise extraction
 
 Using Librosa library, we can extract and separate background and foreground information of speech samples. 
-
 
 ### Prosody Features
 
@@ -95,7 +93,6 @@ A python library "my-voice-analysis" is used to analyze voices by breaking utter
 
 ### Dataset
 ADD 2022 Challenge dataset has been used in this project.
-
 
 ### Training
 To train the model run:
