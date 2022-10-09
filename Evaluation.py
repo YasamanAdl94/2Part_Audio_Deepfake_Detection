@@ -97,7 +97,7 @@ evl_set = ADD(data_path=database_path,label_path=label_path,is_train=False,
 
 
 model.load_state_dict(torch.load(model_path,map_location=device))
-true_y, y_pred, num_total = evaluation(evl_set, model, device, eval_output,clf)
+true_y, y_pred, num_total = evaluate_accuracy(evl_set, model, device, eval_output,clf)
 
 fpr, tpr, threshold = roc_curve(true_y, y_pred, pos_label=1)
 fnr = 1 - tpr
