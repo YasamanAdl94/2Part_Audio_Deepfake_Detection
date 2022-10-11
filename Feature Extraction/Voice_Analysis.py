@@ -15,7 +15,7 @@ from librosa import feature
 import librosa.display
 import numpy as np
 from glob import glob
-mysp=__import__("my-voice-analysis")
+mysp =__import__("my-voice-analysis")
 
 
 def pad(x, max_len=48000):
@@ -30,9 +30,9 @@ def pad(x, max_len=48000):
 
 
 
-data_path = "/home/yahmadia/dataset_add/ADD_Data/ADD_train"
-label_path = "/home/yahmadia/dataset_add/ADD_Data/label/train_label.txt"
-output_path = "/home/yahmadia/dataset_add/ADD_Data/trainSBt.pkl"
+data_path = 'C:\\Users\\yahmadia\\Documents\\ADD\\train\\'
+label_path = 'C:\\Users\\yahmadia\\Documents\\ADD\\label\\train_label.txt'
+output_path = 'C:\\Users\\yahmadia\\Documents\\ADD\\Pickles\\train_semantic.pkl'
 
 # read in labels
 class ADD(Dataset):
@@ -52,9 +52,9 @@ class ADD(Dataset):
         #sig = pad(sig)
         sr = 16000
         print("rate:", rate)
-        p = 'ADD_{}.wav'.format(file_name)
-        c = data_path
-        features_semantic= mysptotal(p,c)
+        p = 'ADD_{}.wav'.format(filename)
+        c = 'C:\\Users\\yahmadia\\Documents\\ADD\\train\\'
+        features_semantic= mysp.mysptotal(p,c)
         '''
                            number_ of_syllables    
                            number_of_pauses          
@@ -71,9 +71,8 @@ class ADD(Dataset):
                            f0_quantile25          
                            f0_quan75                
         '''
-        print(features_prosody.shape)
+        print(features_semantic)
         # rmse = np.reshape(rmse, (1, rmse.size))
-        print("features_prosody:", features_prosody.shape)
         feats.append((features_semantic, label))
         with open(output_path, 'wb') as outfile:
             torch.save(feats, outfile)
