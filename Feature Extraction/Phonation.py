@@ -6,6 +6,8 @@ import soundfile as sf
 import torch
 from torch.utils.data import DataLoader, Dataset, random_split
 import os
+import sys
+from sys import warnoptions
 import numpy as np
 import pickle
 import argparse
@@ -18,7 +20,7 @@ from glob import glob
 import seaborn as sns
 import disvoice
 from disvoice.phonation import Phonation
-phonationf=Phonation()
+phonation=Phonation()
 
 
 def pad(x, max_len=48000):
@@ -30,12 +32,11 @@ def pad(x, max_len=48000):
     padded_x = np.tile(x, (2, num_repeats))[:, :max_len][0]
 
     return padded_x
+    
 
-
-
-data_path = "/home/yahmadia/dataset_add/ADD_Data/ADD_train"
-label_path = "/home/yahmadia/dataset_add/ADD_Data/label/train_label.txt"
-output_path = "/home/yahmadia/dataset_add/ADD_Data/trainP.pkl"
+data_path = 'C:\\Users\\yahmadia\\Documents\\ADD\\train\\'
+label_path = 'C:\\Users\\yahmadia\\Documents\\ADD\\label\\train_label.txt'
+output_path = 'C:\\Users\\yahmadia\\Documents\\ADD\\Pickles\\train_phonation.pkl'
 # read in labels
 class ADD(Dataset):
     filename2label = {}
@@ -51,12 +52,14 @@ class ADD(Dataset):
         label = filename2label[filename]
         print("filename:", os.path.join(data_path, filepath))
         sig, rate = sf.read(os.path.join(data_path, filepath))
-        #sig = pad(sig)
+        #sig=pad(sig)
         sr = 16000
         print("rate:", rate)
-        features_phonation=phonationf.extract_features_path(data_path, static=True, plots=False, fmt="npy") #fmt can also be csv, torch or txt
+        features_phonation=phonation.extract_features_path(data_path, static=True, plots=False, fmt="npy") #fmt can also be csv, torch or txt
+        
         print(features_phonation.shape)
         print("features_phonation:", features_phonation.shape)
         feats.append((features_phonation, label))
+        
         with open(output_path, 'wb') as outfile:
             torch.save(feats, outfile)
