@@ -33,9 +33,9 @@ def pad(x, max_len=48000):
 
     return padded_x
 
-data_path = "/home/yahmadia/dataset_add/ADD_Data/ADD_train"
-label_path = "/home/yahmadia/dataset_add/ADD_Data/label/train_label.txt"
-output_path = "/home/yahmadia/dataset_add/ADD_Data/trainP.pkl"
+data_path = 'C:\\Users\\yahmadia\\Documents\\ADD\\train\\'
+label_path = 'C:\\Users\\yahmadia\\Documents\\ADD\\label\\train_label.txt'
+output_path = 'C:\\Users\\yahmadia\\Documents\\ADD\\Pickles\\train_prosody.pkl'
 # read in labels
 class ADD(Dataset):
     filename2label = {}
