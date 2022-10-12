@@ -74,5 +74,5 @@ class ADD(Dataset):
         print(features_semantic)
         # rmse = np.reshape(rmse, (1, rmse.size))
         feats.append((features_semantic, label))
-        with open(output_path, 'wb') as outfile:
-            torch.save(feats, outfile)
+with open(output_path, 'wb') as outfile:
+    torch.save(feats, outfile)
