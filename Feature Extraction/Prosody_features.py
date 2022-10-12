@@ -58,5 +58,5 @@ class ADD(Dataset):
         print(features_prosody.shape)
         print("features_prosody:", features_prosody.shape)
         feats.append((features_prosody, label))
-with open(output_path, 'wb') as outfile:
-    torch.save(feats, outfile)
+        with open(output_path, 'wb') as outfile:
+            torch.save(feats, outfile)
