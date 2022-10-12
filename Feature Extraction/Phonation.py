@@ -60,6 +60,5 @@ class ADD(Dataset):
         print(features_phonation.shape)
         print("features_phonation:", features_phonation.shape)
         feats.append((features_phonation, label))
-        
         with open(output_path, 'wb') as outfile:
             torch.save(feats, outfile)
