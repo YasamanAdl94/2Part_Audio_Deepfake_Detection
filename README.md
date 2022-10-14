@@ -113,8 +113,8 @@ The obtained EER values so far are as below:
 
 | Features                    | Track 1       |          Track 2          |
 | --------------------------- |:-------------:| -------------------------:|
-| Background noise Analysis   | 8%       |           74%                 |
-| Prosody variations          |      10.43%   |           47.05%         |
+| Background noise Analysis   | In progress       |          In progress                 |
+| Prosody variations          |     In progress  |           47.05%         |
 | Phonation (samples in ADD too short)                   |        78%    |            68%            |
 | Semantic features           |   In progress |           In progress     |
 
