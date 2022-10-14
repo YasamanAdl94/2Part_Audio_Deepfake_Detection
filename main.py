@@ -10,7 +10,7 @@ import yaml
 import pickle
 import torch
 from torch import nn
-from model import RawGAT_ST 
+from model import RawGAT_ST  # In main model script we used our best RawGAT-ST-mul model. To use other models you need to call revelant model scripts from RawGAT_models folder
 from tensorboardX import SummaryWriter
 from core_scripts.startup_config import set_random_seed
 
@@ -24,6 +24,70 @@ def pad(x, max_len=64600):
     padded_x = np.tile(x, (1, num_repeats))[:, :max_len][0]
     return padded_x
 
+
+def evaluate_accuracy(data_loader, model, device):
+    val_loss = 0.0
+    num_total = 0.0
+    model.eval()
+
+    
+    weight = torch.FloatTensor([0.1, 0.9]).to(device)
+    criterion = nn.CrossEntropyLoss(weight=weight)
+
+    for batch_x, batch_y, batch_meta in data_loader:
+        
+        batch_size = batch_x.size(0)
+        num_total += batch_size
+        
+        batch_x = batch_x.to(device)
+        batch_y = batch_y.view(-1).type(torch.int64).to(device)
+        
+        batch_out = model(batch_x,Freq_aug=False)
+        
+        batch_loss = criterion(batch_out, batch_y)
+        val_loss += (batch_loss.item() * batch_size)
+        
+    val_loss /= num_total
+   
+    return val_loss
+
+
+def produce_evaluation_file(dataset, model, device, save_path):
+    data_loader = DataLoader(dataset, batch_size=8, shuffle=False)
+    num_correct = 0.0
+    num_total = 0.0
+    model.eval()
+    
+    fname_list = []
+    key_list = []
+    score_list = []
+
+    for batch_x, batch_y, batch_meta in data_loader:
+        
+        batch_size = batch_x.size(0)
+        num_total += batch_size
+        
+        batch_x = batch_x.to(device)
+        batch_y = batch_y.view(-1).type(torch.int64).to(device)
+        batch_out = model(batch_x, Freq_aug=False)
+        
+        batch_score = (batch_out[:, 1]  
+                       ).data.cpu().numpy().ravel()     
+        
+
+        # add outputs
+        fname_list.extend(list(batch_meta[1]))
+        key_list.extend(
+          ['genuine' if key == 1 else 'fake' for key in list(batch_meta[4])])
+        score_list.extend(batch_score.tolist())
+        
+    with open(save_path, 'w') as fh:
+        for f, k, cm in zip(fname_list, key_list, score_list):
+            if dataset.is_eval:
+                fh.write('{} {} {}\n'.format(f, k, cm))
+            else:
+                fh.write('{} {}\n'.format(f, cm))
+    print('Result saved to {}'.format(save_path))
 
 def train_epoch(data_loader, model, lr,optimizer, device):
     running_loss = 0
@@ -67,9 +131,10 @@ if __name__ == '__main__':
     # Dataset
 
 
+
     # Hyperparameters
-    parser.add_argument('--batch_size', type=int, default=5)
-    parser.add_argument('--num_epochs', type=int, default=100)
+    parser.add_argument('--batch_size', type=int, default=10)
+    parser.add_argument('--num_epochs', type=int, default=1)
     parser.add_argument('--lr', type=float, default=0.0001)
     parser.add_argument('--weight_decay', type=float, default=0.0001)
     parser.add_argument('--loss', type=str, default='WCE',help='Weighted Cross Entropy Loss ')
@@ -169,9 +234,11 @@ if __name__ == '__main__':
         sys.exit(0)
 
     # Training Dataloader
-    data_path = "/home/yahmadia/dataset_add/ADD_Data/ADD_train"
+    data_path = "/home/yahmadia/dataset_add/ADD_Data/trainSB.pkl"
     label_path = "/home/yahmadia/dataset_add/ADD_Data/ADD_train_label.txt"
-    data = torch.load('/home/yahmadia/dataset_add/ADD_Data/trainSBt.pkl') #load pickled file from feature extraction here
+    with open(data_path, 'rb') as infile:
+        data = pickle.load(infile)
+    #data = pickle.load('/home/yahmadia/dataset_add/ADD_Data/trainSBt.pkl')
     train_set = ADD(data,label_path,is_train=True, transform=transforms)
     train_loader = DataLoader(
         train_set, batch_size=args.batch_size, shuffle=True)
