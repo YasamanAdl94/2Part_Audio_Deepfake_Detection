@@ -99,6 +99,8 @@ To train the model run:
 
 python main.py --loss=WCE   --lr=0.0001 --batch_size=5
 
+(Other values such as epoch numbers are set as default but can be changed if given in the command line e.g. --num_epochs=500)
+
 Note: The dataset path should be changed to the corresponding folder. Data processing will result in a pickle file with label and each feature. Pytorch dataloader will load this file to forward to train set.
 
 ### Testing
